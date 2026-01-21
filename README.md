@@ -328,6 +328,10 @@ export const runtime = 'edge';
 
 Remember to enable Node.js compatibility in the Cloudflare dashboard.
 
+## Deployment Options
+
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/9r-iFh?referralCode=RmCO-Z&utm_medium=integration&utm_source=template&utm_campaign=generic)
+
 ## Contributing
 
 Contributions for bug fixed are welcome! However, please open an issue first to discuss your ideas before making a pull request.

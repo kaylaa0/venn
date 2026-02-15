@@ -5,13 +5,12 @@ import Link from 'next/link';
 
 import type { JwtPayload } from '@supabase/supabase-js';
 
-import { PersonalAccountDropdown } from '@kit/accounts/personal-account-dropdown';
-import { useSignOut } from '@kit/supabase/hooks/use-sign-out';
 import { useUser } from '@kit/supabase/hooks/use-user';
 import { Button } from '@kit/ui/button';
 import { If } from '@kit/ui/if';
 import { Trans } from '@kit/ui/trans';
 
+import { TeamAccountDropdownContainer } from '~/components/team-account-dropdown-container';
 import featuresFlagConfig from '~/config/feature-flags.config';
 import pathsConfig from '~/config/paths.config';
 
@@ -46,18 +45,15 @@ export function SiteHeaderAccountSection({
 }
 
 function SuspendedPersonalAccountDropdown(props: { user: JwtPayload | null }) {
-  const signOut = useSignOut();
   const user = useUser(props.user);
   const userData = user.data ?? props.user ?? null;
 
   if (userData) {
     return (
-      <PersonalAccountDropdown
+      <TeamAccountDropdownContainer
         showProfileName={false}
         paths={paths}
-        features={features}
         user={userData}
-        signOutRequested={() => signOut.mutateAsync()}
       />
     );
   }

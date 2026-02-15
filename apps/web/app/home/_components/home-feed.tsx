@@ -42,7 +42,7 @@ export function HomeFeed() {
       const { data: account } = await sb
         .from('accounts')
         .select('team_id')
-        .eq('id', user.data?.id)
+        .eq('id', user.data?.sub)
         .single();
 
       if (!account) return;
@@ -94,13 +94,13 @@ export function HomeFeed() {
     } finally {
       setLoading(false);
     }
-  }, [supabase, user.data?.id]);
+  }, [supabase, user.data?.sub]);
 
   useEffect(() => {
-    if (user.data?.id) {
+    if (user.data?.sub) {
       loadInitial();
     }
-  }, [user.data?.id, loadInitial]);
+  }, [user.data?.sub, loadInitial]);
 
   // --- Infinite scroll: load older posts ---
   const loadMore = useCallback(async () => {

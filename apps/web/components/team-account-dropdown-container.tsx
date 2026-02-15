@@ -44,7 +44,7 @@ export function TeamAccountDropdownContainer(props: {
   const signOut = useSignOut();
   const user = useUser(props.user);
   const userData = user.data;
-  const teamData = useTeamAccountData(userData?.id);
+  const teamData = useTeamAccountData(userData?.sub);
 
   const signedInAsLabel = teamData?.data?.email ?? userData?.email ?? undefined;
 

@@ -8,8 +8,6 @@ export function usePersonalAccountData(
   userId: string,
   partialAccount?: {
     id: string | null;
-    name: string | null;
-    picture_url: string | null;
   },
 ) {
   const client = useSupabase();
@@ -24,9 +22,7 @@ export function usePersonalAccountData(
       .from('accounts')
       .select(
         `
-        id,
-        name,
-        picture_url
+        id
     `,
       )
       .eq('id', userId)
@@ -47,10 +43,9 @@ export function usePersonalAccountData(
     refetchOnMount: false,
     initialData: partialAccount?.id
       ? {
-          id: partialAccount.id,
-          name: partialAccount.name,
-          picture_url: partialAccount.picture_url,
-        }
+        id: partialAccount.id,
+
+      }
       : undefined,
   });
 }

@@ -1,186 +1,245 @@
-![Makerkit - Next.js Supabase SaaS Starter Kit \[Lite version\]](apps/web/public/images/makerkit.webp)
+<a name="readme-top"></a>
 
-# NEW! Next.js Supabase SaaS Starter Kit (Lite)
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/kaylaa0/venn">
+    <img src="apps/web/public/images/dashboard.png" alt="Logo" height="200">
+  </a>
+  <p align="center">
+    <h3 align="center">Venn – Team-Based Social Platform</h3>
+    <a href="https://venn.kayla.works/"><strong>View Live Website »</strong></a>
+  </p>
+</div>
 
-Start building your SaaS faster with our Next.js 15 + Supabase starter kit.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about">About</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#supabase-schema">Supabase Schema</a></li>
+    <li><a href="#key-assumptions--trade-offs">Key Assumptions & Trade-offs</a></li>
+    <li><a href="#what-i-would-improve-with-more-time">What I Would Improve With More Time</a></li>
+    <li><a href="#project-structure">Project Structure</a></li>
+    <li><a href="#environment-variables">Environment Variables</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-👉 **Looking for a full-featured SaaS Starter Kit?** [Check out the complete version](https://makerkit.dev)
+<!-- ABOUT THE PROJECT -->
 
-⭐️ **Why Developers Trust Makerkit:**
-- Production-grade architecture decisions
-- Comprehensive TypeScript setup
-- Modern stack: Next.js 15, Supabase, TailwindCSS v4
-- Quality Code tooling: ESLint v9, Prettier, strict TypeScript, etc.
-- Regular updates and active maintenance
+## About
 
-PS: the documentation for this kit is still being updated, so please check back later for more details.
+Venn is a team-based social platform built on top of a Next.js 15 + Supabase SaaS starter kit (Makerkit Lite). It features team management, social feeds, user authentication, and protected routes — all within a Turborepo monorepo architecture.
 
-## What's Included
+### Built With
 
-### Core Architecture
-- 🏗️ Next.js 15 + Turborepo monorepo setup
-- 🎨 Shadcn UI components with TailwindCSS v4
-- 🔐 Supabase authentication & basic DB
-- 🌐 i18n translations (client + server)
-- ✨ Full TypeScript + ESLint v9 + Prettier configuration
+* [![Next.js][Next.js]][Next.js-url]
+* [![Supabase][Supabase]][Supabase-url]
+* [![TypeScript][TypeScript]][TypeScript-url]
+* [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
+* [![Node.js][Node.js]][Node.js-url]
+* [![Pnpm][Pnpm]][Pnpm-url]
 
-### Key Features
-- 👤 User authentication flow
-- ⚙️ User profile & settings
-- 📱 Responsive marketing pages
-- 🔒 Protected routes
-- 🎯 Basic test setup with Playwright
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Technologies
-
-This starter kit provides core foundations:
-
-🛠️ **Technology Stack**:
-- [Next.js 15](https://nextjs.org/): A React-based framework for server-side rendering and static site generation.
-- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.
-- [Supabase](https://supabase.com/): A realtime database for web and mobile applications.
-- [i18next](https://www.i18next.com/): A popular internationalization framework for JavaScript.
-- [Turborepo](https://turborepo.org/): A monorepo tool for managing multiple packages and applications.
-- [Shadcn UI](https://shadcn.com/): A collection of components built using Tailwind CSS.
-- [Zod](https://github.com/colinhacks/zod): A TypeScript-first schema validation library.
-- [React Query](https://tanstack.com/query/v4): A powerful data fetching and caching library for React.
-- [Prettier](https://prettier.io/): An opinionated code formatter for JavaScript, TypeScript, and CSS.
-- [Eslint](https://eslint.org/): A powerful linting tool for JavaScript and TypeScript.
-- [Playwright](https://playwright.dev/): A framework for end-to-end testing of web applications.
-
-This kit is a trimmed down version of the [full version of this SaaS Starter Kit](https://makerkit.dev). It is a good way to evaluate small part of the full kit, or to simply use it as a base for your own project.
-
-## Comparing Lite vs Full Version
-
-The lite kit is perfect for:
-- Evaluating our code architecture and patterns
-- Building basic SaaS prototypes
-- Learning our tech stack approach
-- Building a basic SaaS tool
-
-The [full version](https://makerkit.dev) adds production features:
-- 💳 Complete billing and subscription system
-- 👥 Team accounts and management
-- 📧 Mailers and Email Templates (Nodemailer, Resend, etc.)
-- 📊 Analytics (GA, Posthog, Umami, etc.)
-- 🔦 Monitoring providers (Sentry, Baselime, etc.)
-- 🔐 Production database schema
-- ✅ Comprehensive test suite
-- 🔔 Realtime Notifications
-- 📝 Blogging system
-- 💡 Documentation system
-- ‍💻 Super Admin panel
-- 🕒 Daily updates and improvements
-- 🐛 Priority bug fixes
-- 🤝 Support
-- ⭐️ Used by 1000+ developers
-- 💪 Active community members
-- 🏢 Powers startups to enterprises
-
-[View complete feature comparison →](https://makerkit.dev/#pricing)
+<!-- GETTING STARTED -->
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18.x or later (preferably the latest LTS version)
-- Docker
-- PNPM
+- **Node.js** 18.x or later (preferably the latest LTS version)
+- **Docker** (required for the Supabase CLI)
+- **pnpm**
 
-Please make sure you have a Docker daemon running on your machine. This is required for the Supabase CLI to work.
+Make sure you have a Docker daemon running on your machine before starting Supabase.
 
 ### Installation
 
-#### 1. Clone this repository
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/kaylaa0/venn.git
+   cd venn
+   ```
 
-```bash
-git clone https://github.com/makerkit/next-supabase-saas-kit-lite.git
+2. **Install dependencies**
+   ```sh
+   pnpm install
+   ```
+
+3. **Start Supabase**
+   ```sh
+   pnpm run supabase:web:start
+   ```
+   Once running, access the Supabase Dashboard at [http://localhost:54323](http://localhost:54323).
+
+4. **Start the Next.js application**
+   ```sh
+   pnpm run dev
+   ```
+   The application will be available at [http://localhost:3000](http://localhost:3000).
+
+5. **Code Health (optional)**
+   ```sh
+   # Format code
+   pnpm run format:fix
+
+   # Lint code
+   pnpm run lint
+
+   # Type check
+   pnpm run typecheck
+   ```
+
+#### Useful Supabase Commands
+
+| Command | Description |
+| --- | --- |
+| `pnpm run supabase:web:start` | Start local Supabase |
+| `pnpm run supabase:web:stop` | Stop local Supabase |
+| `pnpm run supabase:web:reset` | Reset database & apply migrations + seed |
+| `pnpm --filter web supabase migration new <name>` | Create a new migration |
+| `pnpm --filter web supabase db push` | Push migrations to remote project |
+| `pnpm --filter web supabase link` | Link to remote Supabase project |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPABASE SCHEMA -->
+
+## Supabase Schema
+
+### Tables
+
+![Database Tables](apps/web/public/images/schema.png)
+
+### Row Level Security (RLS) Summary
+
+All tables have RLS **enabled**. Authorization is enforced at the database layer rather than relying on application middleware alone. Below is a summary of the policies per table:
+
+| Table | Operation | Policy | Rule |
+| --- | --- | --- | --- |
+| **teams** | `SELECT` | Public read | Everyone (including `anon`) can read all teams |
+| **teams** | `UPDATE` | Owner only | Only authenticated users whose `accounts.team_id` matches the team `id` |
+| **teams** | `INSERT` | Service role | Created automatically via the `on_auth_user_created` trigger (service role) |
+| **accounts** | `SELECT` | Self only | Users can only read their own account (`auth.uid() = id`) |
+| **accounts** | `UPDATE` | Self only | Users can only update their own account (`auth.uid() = id`) |
+| **accounts** | `INSERT` | Service role | Created automatically via the `on_auth_user_created` trigger (service role) |
+| **posts** | `SELECT` | Public read | Global feed is public — everyone can read all posts |
+| **posts** | `INSERT` | Team members | User must belong to a team (`accounts.team_id` check via `auth.uid()`) |
+| **follows** | `SELECT` | Public read | Follow relationships are publicly visible |
+| **follows** | `INSERT` | Team members | Only members of the follower team can create follow relationships |
+| **follows** | `DELETE` | Team members | Only members of the follower team can unfollow |
+| **storage (team_image)** | `SELECT` | Public read | Anyone can view team images |
+| **storage (team_image)** | `INSERT` | Team members | Authenticated users can upload to their own team's folder only |
+| **storage (team_image)** | `UPDATE` | Team members | Authenticated users can update files in their own team's folder only |
+| **storage (team_image)** | `DELETE` | Team members | Authenticated users can delete files from their own team's folder only |
+
+**Additional safeguards:**
+- **Field protection triggers** on `teams` and `accounts` prevent authenticated users from modifying immutable fields (e.g., `id`, `email`).
+- **Auto-assign triggers** (`tr_auto_assign_post_team`, `tr_auto_assign_follower_team`) run as `security definer` to automatically populate `team_id` and `created_by` from the authenticated user's session, preventing spoofing.
+- **Self-follow constraint** (`check_not_self_follow`) prevents a team from following itself at the database level.
+- **Team membership constraint** (`fk_poster_must_be_on_team`) ensures a post's `created_by` user actually belongs to the post's `team_id`.
+- The `anon` role has **all privileges revoked** on `public`, `storage`, and the database — unauthenticated users cannot modify any data.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- KEY ASSUMPTIONS & TRADE-OFFS -->
+
+## Key Assumptions & Trade-offs
+
+| Area | Decision | Rationale |
+| --- | --- | --- |
+| **Auth** | Supabase Auth (email/password) | Built-in, zero-config auth with session management and RLS integration |
+| **Database** | Supabase (Postgres) | Tight integration with auth, instant APIs, and real-time capabilities |
+| **Monorepo** | Turborepo | Faster builds via caching, clear package boundaries, shared code between apps |
+| **Styling** | TailwindCSS v4 + Shadcn UI | Rapid UI development with consistent, accessible components |
+| **i18n** | i18next | Future-proofing for multi-language support even if only one language is used initially |
+| **RLS over middleware** | Row Level Security as primary authorization | Security enforced at the database layer rather than relying solely on application middleware |
+| **Team creation** | Any authenticated user can create a team | Simplicity-first approach; no approval workflow for team creation |
+| **Team joining** | Any authenticated user can join a team | Simplicity-first approach; no approval or invitation workflow for team joining |
+| **Team Moderation** | Any member of the team can change team information and moderate | Again for the MVP project we focus on simplicity therefore there are no roles and restrictions |
+| **Deleting Team/Posts/Users** | Deleting capabilities are unavailable | Deleting is not supported in the MVP to avoid accidental data loss |
+| **Post Ownership** | Recording created_by as well as team_id | This ensures that posts are tied to both the user who created them and the team they belong to, enabling proper access control and accountability. |
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- WHAT I WOULD IMPROVE WITH MORE TIME -->
+
+## What I Would Improve With More Time
+
+### 1. 🔐 Role-Based Team Gatekeeping
+
+The current implementation allows open team access, which can lead to trolling, spam, and abuse. With more time, I would implement a **role-based access control system** with an invitation mechanism:
+
+```
+Enum Role {
+  MODERATOR   // Can change profile pictures, settings, manage team
+  RECRUITER   // Can send invitations, accept join requests
+  MEMBER      // Can post, follow/unfollow, like, comment
+  PENDING     // View-only access — can see global & followed feeds, nothing else
+}
 ```
 
-#### 2. Install dependencies
+**How it would work:**
+- A `user_role` column would be added to the team membership table.
+- When a user **creates** a new team, they become the `MODERATOR`.
+- Users can join existing teams via an **invitation code** — entering a valid code grants `MEMBER` (or higher) role.
+- Users joining **without** an invitation code are assigned the `PENDING` role with minimal permissions (view-only).
+- `RECRUITER` role holders can generate invitation codes and accept/reject pending join requests.
 
-```bash
-pnpm install
-```
+This prevents abuse while keeping onboarding flexible.
 
-#### 3. Start Supabase
+### 2. 📝 Rich Text & Media Embedding for Posts
+- Add ability to format text of posts and embed media (images, videos).
+- Implement a commenting system for posts.
+- Add a "like" feature for posts and comments.
 
-Please make sure you have a Docker daemon running on your machine.
+### 3. 🌐 More Languages for Internationalization (i18n)
+- Add support for additional languages beyond English.
+- Implement language selection in user settings.
 
-Then run the following command to start Supabase:
+### 4. 💬 Team Internal Chat & Collaboration
+- Implement a real-time chat feature for team members using Supabase's real-time capabilities.
+- Allow users to create channels, send messages, and share files within their team.
 
-```bash
-pnpm run supabase:web:start
-```
+### 5. 🔍 Search Functionality
+- Implement search for teams, posts, and users.
 
-Once the Supabase server is running, please access the Supabase Dashboard using the port in the output of the previous command. Normally, you find it at [http://localhost:54323](http://localhost:54323).
+### 6. 🏷️ Hashtags & Mentions
+- Allow users to tag posts with hashtags and mention other users.
+- Implement notifications for mentions.
 
-You will also find all the Supabase services printed in the terminal after the command is executed.
+### 7. ✅ Comprehensive Test Suite
+- Expand Playwright E2E tests to cover all critical user flows.
+- Add unit tests for business logic and API routes.
 
-##### Stopping Supabase
+### 8. 📊 Analytics & Monitoring
+- Integrate PostHog or Umami for usage analytics.
+- Add Sentry for error tracking and performance monitoring.
 
-To stop the Supabase server, run the following command:
+### 9. 🎨 UI/UX Enhancements
+- Redesign the UI to give Venn a more unique and polished look, moving away from the default Shadcn styles.
+- Add animations and micro-interactions for a more engaging user experience.
 
-```bash
-pnpm run supabase:web:stop
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-##### Resetting Supabase
-
-To reset the Supabase server, run the following command:
-
-```bash
-pnpm run supabase:web:reset
-```
-
-##### More Supabase Commands
-
-For more Supabase commands, see the [Supabase CLI documentation](https://supabase.com/docs/guides/cli).
-
-```
-# Create new migration
-pnpm --filter web supabase migration new <name>
-
-# Link to Supabase project
-pnpm --filter web supabase link
-
-# Push migrations
-pnpm --filter web supabase db push
-```
-
-#### 4. Start the Next.js application
-
-```bash
-pnpm run dev
-```
-
-The application will be available at http://localhost:3000.
-
-#### 5. Code Health (linting, formatting, etc.)
-
-To format your code, run the following command:
-
-```bash
-pnpm run format:fix
-```
-
-To lint your code, run the following command:
-
-```bash
-pnpm run lint
-```
-
-To validate your TypeScript code, run the following command:
-
-```bash
-pnpm run typecheck
-```
-
-Turborepo will cache the results of these commands, so you can run them as many times as you want without any performance impact.
+<!-- PROJECT STRUCTURE -->
 
 ## Project Structure
-
-The project is organized into the following folders:
 
 ```
 apps/
@@ -199,149 +258,54 @@ packages/
     └── ...
 ```
 
-For more information about this project structure, see the article [Next.js App Router: Project Structure](https://makerkit.dev/blog/tutorials/nextjs-app-router-project-structure).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Environment Variables
+<!-- ENVIRONMENT VARIABLES -->
 
-You can configure the application by setting environment variables in the `.env.local` file.
+## Environment Variables
 
-Here are the available variables:
+Configure the application via `.env.local`:
 
-| Variable Name | Description | Default Value |
+| Variable | Description | Default |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | The URL of your SaaS application | `http://localhost:3000` |
-| `NEXT_PUBLIC_PRODUCT_NAME` | The name of your SaaS product | `Makerkit` |
-| `NEXT_PUBLIC_SITE_TITLE` | The title of your SaaS product | `Makerkit - The easiest way to build and manage your SaaS` |
-| `NEXT_PUBLIC_SITE_DESCRIPTION` | The description of your SaaS product | `Makerkit is the easiest way to build and manage your SaaS. It provides you with the tools you need to build your SaaS, without the hassle of building it from scratch.` |
-| `NEXT_PUBLIC_DEFAULT_THEME_MODE` | The default theme mode of your SaaS product | `light` |
-| `NEXT_PUBLIC_THEME_COLOR` | The default theme color of your SaaS product | `#ffffff` |
-| `NEXT_PUBLIC_THEME_COLOR_DARK` | The default theme color of your SaaS product in dark mode | `#0a0a0a` |
-| `NEXT_PUBLIC_SUPABASE_URL` | The URL of your Supabase project | `http://127.0.0.1:54321` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | The anon key of your Supabase project | ''
-| `SUPABASE_SERVICE_ROLE_KEY` | The service role key of your Supabase project | ''
+| `NEXT_PUBLIC_SITE_URL` | Application URL | `http://localhost:3000` |
+| `NEXT_PUBLIC_PRODUCT_NAME` | Product name | `Venn` |
+| `NEXT_PUBLIC_SITE_TITLE` | Site title | `Venn` |
+| `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description | (see `.env`) |
+| `NEXT_PUBLIC_DEFAULT_THEME_MODE` | Default theme | `light` |
+| `NEXT_PUBLIC_THEME_COLOR` | Theme color (light) | `#ffffff` |
+| `NEXT_PUBLIC_THEME_COLOR_DARK` | Theme color (dark) | `#0a0a0a` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase URL | `http://127.0.0.1:54321` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key | — |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key | — |
 
-## Architecture
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This starter kit uses a monorepo architecture.
+<!-- CONTACT -->
 
-1. The `apps/web` directory is the Next.js application.
-2. The `packages` directory contains all the packages used by the application.
-3. The `packages/features` directory contains all the features of the application.
-4. The `packages/ui` directory contains all the UI components.
+## Contact
 
-For more information about the architecture, please refer to the [Makerkit blog post about Next.js Project Structure](https://makerkit.dev/blog/tutorials/nextjs-app-router-project-structure).
+Kayla Akyüz — kaylakyuz@gmail.com
 
-### Marketing Pages
+Project Link: [GitHub](https://github.com/kaylaa0/venn)
 
-Marketing pages are located in the `apps/web/app/(marketing)` directory. These pages are used to showcase the features of the SaaS and provide information about the product.
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-### Authentication
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Authenticated is backed by Supabase. The `apps/web/app/auth` directory contains the authentication pages, however, the logic is into its own package `@kit/auth` located in `packages/features/auth`.
+<!-- MARKDOWN LINKS & IMAGES -->
 
-This package can be used across multiple applications.
-
-### Gated Pages
-
-Gated pages are located in the `apps/web/app/home` directory. Here is where you can build your SaaS pages that are gated by authentication.
-
-### Database
-
-The Supabase database is located in the `apps/web/supabase` directory. In this directory you will find the database schema, migrations, and seed data.
-
-#### Creating a new migration
-To create a new migration, run the following command:
-
-```bash
-pnpm --filter web supabase migration new --name <migration-name>
-```
-
-This command will create a new migration file in the `apps/web/supabase/migrations` directory. 
-
-#### Applying a migration
-
-Once you have created a migration, you can apply it to the database by running the following command:
-
-```bash
-pnpm run supabase:web:reset
-```
-
-This command will apply the migration to the database and update the schema. It will also reset the database using the provided seed data.
-
-#### Linking the Supabase database
-
-Linking the local Supabase database to the Supabase project is done by running the following command:
-
-```bash
-pnpm --filter web supabase db link
-```
-
-This command will link the local Supabase database to the Supabase project.
-
-#### Pushing the migration to the Supabase project
-
-After you have made changes to the migration, you can push the migration to the Supabase project by running the following command:
-
-```bash
-pnpm --filter web supabase db push
-```
-
-This command will push the migration to the Supabase project. You can now apply the migration to the Supabase database.
-
-## Going to Production
-
-#### 1. Create a Supabase project
-
-To deploy your application to production, you will need to create a Supabase project.
-
-#### 2. Push the migration to the Supabase project
-
-After you have made changes to the migration, you can push the migration to the Supabase project by running the following command:
-
-```bash
-pnpm --filter web supabase db push
-```
-
-This command will push the migration to the Supabase project.
-
-#### 3. Set the Supabase Callback URL
-
-When working with a remote Supabase project, you will need to set the Supabase Callback URL.
-
-Please set the callback URL in the Supabase project settings to the following URL:
-
-`<url>/auth/callback`
-
-Where `<url>` is the URL of your application.
-
-#### 4. Deploy to Vercel or any other hosting provider
-
-You can deploy your application to any hosting provider that supports Next.js.
-
-#### 5. Deploy to Cloudflare
-
-The configuration should work as is, but you need to set the runtime to `edge` in the root layout file (`apps/web/app/layout.tsx`).
-
-```tsx
-export const runtime = 'edge';
-```
-
-Remember to enable Node.js compatibility in the Cloudflare dashboard.
-
-## Deployment Options
-
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/9r-iFh?referralCode=RmCO-Z&utm_medium=integration&utm_source=template&utm_campaign=generic)
-
-## Contributing
-
-Contributions for bug fixed are welcome! However, please open an issue first to discuss your ideas before making a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Support
-
-No support is provided for this kit. Feel free to open an issue if you have any questions or need help, but there is no guaranteed response time, nor guarantee a fix.
-
-For dedicated support, priority fixes, and advanced features, [check out our full version](https://makerkit.dev).
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=0077B5&colorA=0077B5
+[linkedin-url]: https://www.linkedin.com/in/-kayla-/
+[Next.js]: https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=fff&style=for-the-badge
+[Next.js-url]: https://nextjs.org/
+[TypeScript]: https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge
+[TypeScript-url]: https://www.typescriptlang.org/
+[Supabase]: https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff&style=for-the-badge
+[Supabase-url]: https://supabase.com/
+[TailwindCSS]: https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=for-the-badge
+[TailwindCSS-url]: https://tailwindcss.com/
+[Node.js]: https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=fff&style=for-the-badge
+[Node.js-url]: https://nodejs.org/
+[Pnpm]: https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=fff&style=for-the-badge
+[Pnpm-url]: https://pnpm.io/

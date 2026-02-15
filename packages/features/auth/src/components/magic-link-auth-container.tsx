@@ -30,10 +30,14 @@ export function MagicLinkAuthContainer({
   shouldCreateUser,
   defaultValues,
   displayTermsCheckbox,
+  metadata,
+  onSuccess,
 }: {
   redirectUrl: string;
   shouldCreateUser: boolean;
   displayTermsCheckbox?: boolean;
+  metadata?: Record<string, string | undefined>;
+  onSuccess?: () => void;
 
   defaultValues?: {
     email: string;
@@ -65,6 +69,7 @@ export function MagicLinkAuthContainer({
           emailRedirectTo,
           captchaToken,
           shouldCreateUser,
+          data: metadata ?? {},
         },
       });
     };
@@ -79,6 +84,8 @@ export function MagicLinkAuthContainer({
   };
 
   if (signInWithOtpMutation.data) {
+    if (onSuccess) onSuccess();
+
     return <SuccessAlert />;
   }
 

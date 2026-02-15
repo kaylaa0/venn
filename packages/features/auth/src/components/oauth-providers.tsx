@@ -26,6 +26,8 @@ const OAUTH_SCOPES: Partial<Record<Provider, string>> = {
   // add your OAuth providers here
 };
 
+const PENDING_TEAM_KEY = 'pending_team_selection';
+
 export function OauthProviders(props: {
   shouldCreateUser: boolean;
   enabledProviders: Provider[];
@@ -34,6 +36,8 @@ export function OauthProviders(props: {
     callback: string;
     returnPath: string;
   };
+
+  metadata?: Record<string, string | undefined>;
 }) {
   const signInWithProviderMutation = useSignInWithProvider();
 
@@ -94,6 +98,18 @@ export function OauthProviders(props: {
                       ...scopesOpts,
                     },
                   };
+
+                  // Persist team selection for post-OAuth handling
+                  if (props.metadata) {
+                    try {
+                      localStorage.setItem(
+                        PENDING_TEAM_KEY,
+                        JSON.stringify(props.metadata),
+                      );
+                    } catch {
+                      // localStorage may be unavailable
+                    }
+                  }
 
                   return onSignInWithProvider(() =>
                     signInWithProviderMutation.mutateAsync(credentials),

@@ -23,6 +23,8 @@ export function SignUpMethodsContainer(props: {
   };
 
   displayTermsCheckbox?: boolean;
+  metadata?: Record<string, string | undefined>;
+  onSignUp?: () => void;
 }) {
   const redirectUrl = getCallbackUrl(props);
   const defaultValues = getDefaultValues();
@@ -34,6 +36,8 @@ export function SignUpMethodsContainer(props: {
           emailRedirectTo={redirectUrl}
           defaultValues={defaultValues}
           displayTermsCheckbox={props.displayTermsCheckbox}
+          metadata={props.metadata}
+          onSignUp={props.onSignUp}
         />
       </If>
 
@@ -43,6 +47,8 @@ export function SignUpMethodsContainer(props: {
           shouldCreateUser={true}
           defaultValues={defaultValues}
           displayTermsCheckbox={props.displayTermsCheckbox}
+          metadata={props.metadata}
+          onSuccess={props.onSignUp}
         />
       </If>
 
@@ -56,6 +62,7 @@ export function SignUpMethodsContainer(props: {
             callback: props.paths.callback,
             returnPath: props.paths.appHome,
           }}
+          metadata={props.metadata}
         />
       </If>
     </>

@@ -1,3 +1,7 @@
+'use client';
+
+import { useMemo, useState } from 'react';
+
 import Link from 'next/link';
 
 import { SignUpMethodsContainer } from '@kit/auth/sign-up';
@@ -7,16 +11,10 @@ import { Trans } from '@kit/ui/trans';
 
 import authConfig from '~/config/auth.config';
 import pathsConfig from '~/config/paths.config';
-import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
-import { withI18n } from '~/lib/i18n/with-i18n';
-
-export const generateMetadata = async () => {
-  const i18n = await createI18nServerInstance();
-
-  return {
-    title: i18n.t('auth:signUp'),
-  };
-};
+import {
+  TeamSelector,
+  type TeamSelection,
+} from '~/components/auth/team-selector';
 
 const paths = {
   callback: pathsConfig.auth.callback,
@@ -24,19 +22,53 @@ const paths = {
 };
 
 function SignUpPage() {
+  const [teamSelection, setTeamSelection] = useState<TeamSelection | null>(
+    null,
+  );
+  const [signUpComplete, setSignUpComplete] = useState(false);
+
+  // Derive metadata for the auth call from the team selection
+  const metadata = useMemo(() => {
+    if (!teamSelection) return undefined;
+
+    if (teamSelection.mode === 'join') {
+      return { team_id: teamSelection.team_id };
+    }
+
+    return { team_name: teamSelection.name };
+  }, [teamSelection]);
+
   return (
     <>
       <Heading level={5} className={'tracking-tight'}>
         <Trans i18nKey={'auth:signUpHeading'} />
       </Heading>
 
-      <SignUpMethodsContainer
-        providers={authConfig.providers}
-        displayTermsCheckbox={authConfig.displayTermsCheckbox}
-        paths={paths}
-      />
+      <div className="space-y-6">
+        {/* Team selection - hidden after successful signup */}
+        {!signUpComplete && (
+          <TeamSelector value={teamSelection} onChange={setTeamSelection} />
+        )}
 
-      <div className={'flex justify-center'}>
+        {/* Auth form - disabled until a team is chosen */}
+        <div
+          className={
+            !metadata && !signUpComplete
+              ? 'pointer-events-none select-none opacity-50'
+              : undefined
+          }
+        >
+          <SignUpMethodsContainer
+            providers={authConfig.providers}
+            displayTermsCheckbox={authConfig.displayTermsCheckbox}
+            paths={paths}
+            metadata={metadata}
+            onSignUp={() => setSignUpComplete(true)}
+          />
+        </div>
+      </div>
+
+      <div className={'mt-4 flex justify-center'}>
         <Button asChild variant={'link'} size={'sm'}>
           <Link href={pathsConfig.auth.signIn}>
             <Trans i18nKey={'auth:alreadyHaveAnAccount'} />
@@ -47,4 +79,4 @@ function SignUpPage() {
   );
 }
 
-export default withI18n(SignUpPage);
+export default SignUpPage;

@@ -153,6 +153,12 @@ alter table "public"."accounts" enable row level security;
  */
 -- SELECT(teams):
 -- Everyone can read teams
+grant usage on schema public to anon;
+
+grant
+select
+    on table public.teams to anon;
+
 create policy teams_read on public.teams for
 select
     to public using (true);
@@ -323,19 +329,26 @@ execute procedure kit.handle_update_user_email ();
 create
 or replace function kit.new_user_created_setup () returns trigger language plpgsql security definer as $$
 declare
-    team_name text;
-    user_picture text;
+    team_name_val text;
+    user_picture  text;
     provided_team_id uuid;
-    target_team_id uuid;
+    target_team_id   uuid;
 begin
-    team_name := coalesce(new.raw_user_meta_data ->> 'name', split_part(new.email, '@', 1), '');
+    -- Read the custom team name from dedicated key "team_name".
+    -- Falls back to "name" (legacy) then to "<local-part>'s Team".
+    team_name_val := coalesce(
+        nullif(trim(new.raw_user_meta_data ->> 'team_name'), ''),
+        nullif(trim(new.raw_user_meta_data ->> 'name'), ''),
+        split_part(new.email, '@', 1) || '''s Team'
+    );
+
     user_picture := new.raw_user_meta_data ->> 'avatar_url';
-    
-    -- Did the user choose a team?
+
+    -- Did the user choose an existing team?
     begin
         provided_team_id := (new.raw_user_meta_data ->> 'team_id')::uuid;
     exception when others then
-        provided_team_id := null; -- Ignore garbage inputs that are not valid UUIDs
+        provided_team_id := null;
     end;
 
     if provided_team_id is not null then
@@ -349,13 +362,9 @@ begin
             raise exception 'Team not found. Cannot join non-existent team.';
         end if;
     else
-        -- PATH B: CREATE NEW (Default)
+        -- PATH B: CREATE NEW
         insert into public.teams (name, picture_url, created_by)
-        values (
-            team_name || '''s Team', 
-            user_picture,
-            new.id
-        )
+        values (team_name_val, user_picture, new.id)
         returning id into target_team_id;
     end if;
 

@@ -21,6 +21,7 @@ interface EmailPasswordSignUpContainerProps {
 
   onSignUp?: (userId?: string) => unknown;
   emailRedirectTo: string;
+  metadata?: Record<string, string | undefined>;
 }
 
 export function EmailPasswordSignUpContainer({
@@ -28,6 +29,7 @@ export function EmailPasswordSignUpContainer({
   onSignUp,
   emailRedirectTo,
   displayTermsCheckbox,
+  metadata,
 }: EmailPasswordSignUpContainerProps) {
   const { captchaToken, resetCaptchaToken } = useCaptchaToken();
 
@@ -48,6 +50,7 @@ export function EmailPasswordSignUpContainer({
           ...credentials,
           emailRedirectTo,
           captchaToken,
+          metadata,
         });
 
         setShowVerifyEmailAlert(true);
@@ -65,6 +68,7 @@ export function EmailPasswordSignUpContainer({
       captchaToken,
       emailRedirectTo,
       loading,
+      metadata,
       onSignUp,
       resetCaptchaToken,
       signUpMutation,

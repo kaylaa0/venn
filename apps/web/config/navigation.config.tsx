@@ -1,4 +1,4 @@
-import { Home, User } from 'lucide-react';
+import { Home, Settings, User } from 'lucide-react';
 import { z } from 'zod';
 
 import { NavigationConfigSchema } from '@kit/ui/navigation-schema';
@@ -17,15 +17,20 @@ const routes = [
         Icon: <Home className={iconClasses} />,
         end: true,
       },
+      {
+        label: 'common:routes.profile',
+        path: pathsConfig.app.profile,
+        Icon: <User className={iconClasses} />,
+      },
     ],
   },
   {
     label: 'common:routes.settings',
     children: [
       {
-        label: 'common:routes.profile',
+        label: 'common:routes.settings',
         path: pathsConfig.app.profileSettings,
-        Icon: <User className={iconClasses} />,
+        Icon: <Settings className={iconClasses} />,
       },
     ],
   },

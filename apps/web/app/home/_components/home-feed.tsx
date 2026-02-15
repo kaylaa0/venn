@@ -10,6 +10,7 @@ import { LoadingOverlay } from '@kit/ui/loading-overlay';
 
 import { PostCard, type PostData } from './post-card';
 import { PostComposer } from './post-composer';
+import { FollowProvider } from './use-follow';
 
 const PAGE_SIZE = 20;
 
@@ -30,7 +31,6 @@ export function HomeFeed() {
   const sentinelRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
   const cursorRef = useRef<string | null>(null);
-  const feedTeamIdsRef = useRef<string[]>([]);
 
   // --- Initial load ---
   const loadInitial = useCallback(async () => {
@@ -55,24 +55,10 @@ export function HomeFeed() {
 
       if (teamData) setTeam(teamData);
 
-      // Get followed team ids
-      const { data: follows } = await sb
-        .from('follows')
-        .select('following_team_id')
-        .eq('follower_team_id', account.team_id);
-
-      const followedIds = (follows ?? []).map(
-        (f: { following_team_id: string }) => f.following_team_id,
-      );
-
-      const feedTeamIds = [account.team_id, ...followedIds];
-      feedTeamIdsRef.current = feedTeamIds;
-
-      // Fetch first page
+      // Fetch first page — ALL posts (global feed)
       const { data: postsData } = await sb
         .from('posts')
         .select('id, content, created_at, team_id')
-        .in('team_id', feedTeamIds)
         .order('created_at', { ascending: false })
         .limit(PAGE_SIZE);
 
@@ -104,7 +90,7 @@ export function HomeFeed() {
 
   // --- Infinite scroll: load older posts ---
   const loadMore = useCallback(async () => {
-    if (loadingRef.current || !cursorRef.current || feedTeamIdsRef.current.length === 0) return;
+    if (loadingRef.current || !cursorRef.current) return;
     loadingRef.current = true;
     setLoadingMore(true);
 
@@ -115,7 +101,6 @@ export function HomeFeed() {
       const { data: olderPosts } = await sb
         .from('posts')
         .select('id, content, created_at, team_id')
-        .in('team_id', feedTeamIdsRef.current)
         .lt('created_at', cursorRef.current)
         .order('created_at', { ascending: false })
         .limit(PAGE_SIZE);
@@ -159,7 +144,7 @@ export function HomeFeed() {
     return () => observer.disconnect();
   }, [loadMore, hasMore, loading]);
 
-  // --- Realtime: subscribe to new posts from followed teams ---
+  // --- Realtime: subscribe to ALL new posts ---
   useEffect(() => {
     if (!team) return;
 
@@ -180,9 +165,6 @@ export function HomeFeed() {
           };
         }) => {
           const newRow = payload.new;
-
-          // Only show posts from teams we follow (or our own)
-          if (!feedTeamIdsRef.current.includes(newRow.team_id)) return;
 
           const { data: postTeam } = await sb
             .from('teams')
@@ -216,7 +198,6 @@ export function HomeFeed() {
 
   // --- After composing a post, reload fresh ---
   const handlePostCreated = useCallback(() => {
-    // Just re-run the initial load to get fresh data
     setLoading(true);
     setHasMore(true);
     cursorRef.current = null;
@@ -228,34 +209,36 @@ export function HomeFeed() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-6">
-      {team && <PostComposer team={team} onPostCreated={handlePostCreated} />}
+    <FollowProvider myTeamId={team?.id ?? null}>
+      <div className="mx-auto w-full max-w-2xl space-y-6">
+        {team && <PostComposer team={team} onPostCreated={handlePostCreated} />}
 
-      {posts.length === 0 ? (
-        <div className="text-muted-foreground py-12 text-center text-sm">
-          No posts yet. Be the first to post something, or follow other teams!
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
-      )}
-
-      {/* Infinite scroll sentinel */}
-      <div ref={sentinelRef} className="py-4 text-center">
-        {loadingMore && (
-          <Loader2 className="text-muted-foreground mx-auto h-5 w-5 animate-spin" />
+        {posts.length === 0 ? (
+          <div className="text-muted-foreground py-12 text-center text-sm">
+            No posts yet. Be the first to post something!
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} myTeamId={team?.id ?? null} />
+            ))}
+          </div>
         )}
 
-        {!hasMore && posts.length > 0 && (
-          <span className="text-muted-foreground text-xs">
-            You&apos;ve reached the end
-          </span>
-        )}
+        {/* Infinite scroll sentinel */}
+        <div ref={sentinelRef} className="py-4 text-center">
+          {loadingMore && (
+            <Loader2 className="text-muted-foreground mx-auto h-5 w-5 animate-spin" />
+          )}
+
+          {!hasMore && posts.length > 0 && (
+            <span className="text-muted-foreground text-xs">
+              You&apos;ve reached the end
+            </span>
+          )}
+        </div>
       </div>
-    </div>
+    </FollowProvider>
   );
 }
 

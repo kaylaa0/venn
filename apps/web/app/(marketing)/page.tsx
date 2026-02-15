@@ -134,13 +134,9 @@ function MainCallToActionButton() {
           </span>
         </Link>
       </CtaButton>
-      {/*
       <CtaButton variant={'link'}>
-        <Link href={'/contact'}>
-          <Trans i18nKey={'common:contactUs'} />
-        </Link>
+        <Link href={'/feed'}>Explore the Feed</Link>
       </CtaButton>
-      */}
     </div>
   );
 }

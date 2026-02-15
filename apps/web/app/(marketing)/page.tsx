@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ArrowRightIcon, LayoutDashboard } from 'lucide-react';
+import { ArrowRightIcon, Users } from 'lucide-react';
 
 import {
   CtaButton,
@@ -22,20 +22,21 @@ function Home() {
       <div className={'container mx-auto'}>
         <Hero
           pill={
-            <Pill label={'New'}>
-              <span>The leading SaaS Starter Kit for ambitious developers</span>
+            <Pill label={'Venn 0.3'}>
+              <span>The social platform reimagined for collaboration</span>
             </Pill>
           }
           title={
             <>
-              <span>The ultimate SaaS Starter</span>
-              <span>for your next project</span>
+              <span>Don&apos;t post as a user.</span>
+              <span className="text-primary">Post as a Powerhouse.</span>
             </>
           }
           subtitle={
             <span>
-              Build and Ship a SaaS faster than ever before with the next-gen
-              SaaS Starter Kit. Ship your SaaS in days, not months.
+              Venn replaces individual egos with team identity. Log in with your
+              own credentials, but speak with one unified voice. The first
+              social network where the group is the profile.
             </span>
           }
           cta={<MainCallToActionButton />}
@@ -48,7 +49,7 @@ function Home() {
               width={3558}
               height={2222}
               src={`/images/dashboard.webp`}
-              alt={`App Image`}
+              alt={`Venn Team Dashboard Interface`}
             />
           }
         />
@@ -62,47 +63,47 @@ function Home() {
             heading={
               <>
                 <b className="font-semibold dark:text-white">
-                  The ultimate SaaS Starter Kit
+                  A social engine built for collectives
                 </b>
                 .{' '}
                 <span className="text-muted-foreground font-normal">
-                  Unleash your creativity and build your SaaS faster than ever
-                  with Makerkit.
+                  Bridges the gap between individual contribution and group
+                  identity.
                 </span>
               </>
             }
             icon={
               <FeatureShowcaseIconContainer>
-                <LayoutDashboard className="h-5" />
-                <span>All-in-one solution</span>
+                <Users className="h-5" />
+                <span>Group-First Architecture</span>
               </FeatureShowcaseIconContainer>
             }
           >
             <FeatureGrid>
               <FeatureCard
                 className={'relative col-span-2 overflow-hidden'}
-                label={'Beautiful Dashboard'}
-                description={`Makerkit provides a beautiful dashboard to manage your SaaS business.`}
+                label={'The Team Command Center'}
+                description={`Manage your team's public presence from a centralized dashboard.`}
               />
 
               <FeatureCard
                 className={
                   'relative col-span-2 w-full overflow-hidden lg:col-span-1'
                 }
-                label={'Authentication'}
-                description={`Makerkit provides a variety of providers to allow your users to sign in.`}
+                label={'Secure Individual Access'}
+                description={`Say goodbye to shared passwords. Users log in with their own secure accounts, but every action they take is attributed to the team.`}
               />
 
               <FeatureCard
                 className={'relative col-span-2 overflow-hidden lg:col-span-1'}
-                label={'Multi Tenancy'}
-                description={`Multi tenant memberships for your SaaS business.`}
+                label={'Unified Identity'}
+                description={`No more fragmented personal accounts. Venn ensures your group presents a single, professional, and consistent voice to the world.`}
               />
 
               <FeatureCard
                 className={'relative col-span-2 overflow-hidden'}
-                label={'Billing'}
-                description={`Makerkit supports multiple payment gateways to charge your customers.`}
+                label={'Collaborative Publishing'}
+                description={`Powered by Supabase RLS, Venn ensures that only authorized members can post on behalf of the team, creating a seamless and secure workflow for creative squads.`}
               />
             </FeatureGrid>
           </FeatureShowcase>
@@ -133,12 +134,13 @@ function MainCallToActionButton() {
           </span>
         </Link>
       </CtaButton>
-
+      {/*
       <CtaButton variant={'link'}>
         <Link href={'/contact'}>
           <Trans i18nKey={'common:contactUs'} />
         </Link>
       </CtaButton>
+      */}
     </div>
   );
 }

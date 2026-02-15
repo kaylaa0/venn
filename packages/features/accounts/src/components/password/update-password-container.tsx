@@ -22,9 +22,20 @@ export function UpdatePasswordFormContainer(
     return null;
   }
 
-  const canUpdatePassword = user.amr?.some(
-    (item: { method: string }) => item.method === `password`,
-  );
+  // Check if the user signed up with email/password.
+  // We check app_metadata.providers (which lists all linked identity providers)
+  // rather than the session AMR, because after email confirmation the session
+  // method becomes 'otp' even though the user has a password.
+  const userMeta = (user as Record<string, unknown>)?.app_metadata as
+    | { provider?: string; providers?: string[] }
+    | undefined;
+
+  const canUpdatePassword =
+    userMeta?.providers?.includes('email') ||
+    userMeta?.provider === 'email' ||
+    user.amr?.some(
+      (item: { method: string }) => item.method === 'password',
+    );
 
   if (!canUpdatePassword) {
     return <WarnCannotUpdatePasswordAlert />;

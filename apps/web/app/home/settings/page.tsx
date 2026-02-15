@@ -9,10 +9,12 @@ import { createI18nServerInstance } from '~/lib/i18n/i18n.server';
 import { withI18n } from '~/lib/i18n/with-i18n';
 import { requireUserInServerComponent } from '~/lib/server/require-user-in-server-component';
 
+import { TeamSettingsContainer } from './_components/team-settings-container';
+
 const callbackPath = pathsConfig.auth.callback;
 
 const features = {
-  enableAccountDeletion: true,
+  enableAccountDeletion: false,
   enablePasswordUpdate: authConfig.providers.password,
 };
 
@@ -34,15 +36,33 @@ function PersonalAccountSettingsPage() {
   const userId = user.id;
 
   return (
-    <PageBody>
-      <div className={'flex w-full flex-1 flex-col lg:max-w-2xl'}>
-        <PersonalAccountSettingsContainer
-          userId={userId}
-          paths={paths}
-          features={features}
-        />
-      </div>
-    </PageBody>
+    <>
+      <PageBody>
+        <div className={'flex w-full flex-1 flex-col lg:max-w-2xl'}>
+          <div className="mb-8 space-y-2">
+            <h2 className="text-lg font-semibold">Team Profile</h2>
+            <p className="text-muted-foreground text-sm">
+              Manage how your team appears on Venn
+            </p>
+          </div>
+
+          <TeamSettingsContainer />
+
+          <div className="my-8 space-y-2">
+            <h2 className="text-lg font-semibold">Account Settings</h2>
+            <p className="text-muted-foreground text-sm">
+              Manage your personal account credentials
+            </p>
+          </div>
+
+          <PersonalAccountSettingsContainer
+            userId={userId}
+            paths={paths}
+            features={features}
+          />
+        </div>
+      </PageBody>
+    </>
   );
 }
 

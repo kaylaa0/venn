@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-
 import type { JwtPayload } from '@supabase/supabase-js';
 
 import { ChevronsUpDown, Home, LogOut } from 'lucide-react';
@@ -138,7 +136,7 @@ export function TeamAccountDropdownContainer(props: {
 
         <If condition={!!props.paths?.home}>
           <DropdownMenuItem asChild>
-            <Link
+            <a
               className={'flex w-full cursor-pointer items-center space-x-2'}
               href={props.paths?.home ?? '/'}
             >
@@ -147,7 +145,7 @@ export function TeamAccountDropdownContainer(props: {
               <span>
                 <Trans i18nKey={'common:routes.home'} />
               </span>
-            </Link>
+            </a>
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />

@@ -30,14 +30,14 @@ function LogoImage({
           <stop
             className="stop0"
             offset="0"
-            stop-opacity="1"
-            stop-color="rgb(52,185,165)"
+            stopOpacity="1"
+            stopColor="rgb(52,185,165)"
           />
           <stop
             className="stop1"
             offset="1"
-            stop-opacity="1"
-            stop-color="rgb(43,145,217)"
+            stopOpacity="1"
+            stopColor="rgb(43,145,217)"
           />
         </linearGradient>
       </defs>

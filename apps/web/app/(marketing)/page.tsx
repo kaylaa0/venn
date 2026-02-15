@@ -48,7 +48,7 @@ function Home() {
               }
               width={3558}
               height={2222}
-              src={`/images/dashboard.webp`}
+              src={`/images/dashboard.png`}
               alt={`Venn Team Dashboard Interface`}
             />
           }

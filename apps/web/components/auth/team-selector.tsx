@@ -112,7 +112,7 @@ export function TeamSelector({
         <div className="flex gap-2">
           <Input
             autoFocus
-            placeholder="e.g. Vizio Vanguards"
+            placeholder="e.g. Venn Vanguards"
             value={newTeamName}
             onChange={(e) => {
               setNewTeamName(e.target.value);

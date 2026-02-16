@@ -26,12 +26,16 @@ interface FollowContextValue {
 
 const FollowContext = createContext<FollowContextValue | null>(null);
 
+const fallback: FollowContextValue = {
+  followedTeamIds: new Set<string>(),
+  ready: false,
+  toggle: async () => {},
+  isToggling: () => false,
+};
+
 export function useFollowContext() {
   const ctx = useContext(FollowContext);
-  if (!ctx) {
-    throw new Error('useFollowContext must be used within FollowProvider');
-  }
-  return ctx;
+  return ctx ?? fallback;
 }
 
 interface FollowProviderProps {
